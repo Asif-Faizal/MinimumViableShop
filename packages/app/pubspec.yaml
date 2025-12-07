@@ -1,0 +1,38 @@
+name: mvs_app
+description: Main Flutter application for Minimum Viable Shop monorepo
+version: 0.1.0
+publish_to: none
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.4
+  go_router: ^14.2.0
+  get_it: ^7.6.0
+  mvs_core:
+    path: ../core
+  mvs_shared_ui:
+    path: ../shared_ui
+  features_auth:
+    path: ../features/auth
+  features_home:
+    path: ../features/home
+  features_catalog:
+    path: ../features/catalog
+  features_cart:
+    path: ../features/cart
+  features_checkout:
+    path: ../features/checkout
+  features_orders:
+    path: ../features/orders
+  features_account:
+    path: ../features/account
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

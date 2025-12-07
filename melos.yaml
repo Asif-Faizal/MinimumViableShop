@@ -1,0 +1,13 @@
+name: minimum_viable_shop_monorepo
+packages:
+  - packages/**
+scripts:
+  bootstrap: melos bootstrap
+  analyze: melos exec -c 1 -- flutter analyze
+  format: melos exec -c 1 -- dart format .
+  test: melos exec -c 1 -- flutter test
+  gen: melos exec --depends-on build_runner -- dart run build_runner build -d
+  build:android:client_a: flutter build apk --release --dart-define=ENV=prod --dart-define=CLIENT_ID=client_a --dart-define=BASE_URL=https://api.minimumviableshop.com/client_a
+  build:android:client_b: flutter build apk --release --dart-define=ENV=prod --dart-define=CLIENT_ID=client_b --dart-define=BASE_URL=https://api.minimumviableshop.com/client_b
+  build:ios:client_a: flutter build ios --release --no-codesign --dart-define=ENV=prod --dart-define=CLIENT_ID=client_a --dart-define=BASE_URL=https://api.minimumviableshop.com/client_a
+  build:ios:client_b: flutter build ios --release --no-codesign --dart-define=ENV=prod --dart-define=CLIENT_ID=client_b --dart-define=BASE_URL=https://api.minimumviableshop.com/client_b

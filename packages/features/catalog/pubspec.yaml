@@ -1,0 +1,17 @@
+name: features_catalog
+description: Catalog feature
+version: 0.1.0
+publish_to: none
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  go_router: ^14.2.0
+  mvs_shared_ui:
+    path: ../../shared_ui
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
