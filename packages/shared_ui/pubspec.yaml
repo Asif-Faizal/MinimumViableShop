@@ -3,11 +3,13 @@ description: Shared UI components and theme for Minimum Viable Shop
 version: 0.1.0
 publish_to: none
 environment:
-  sdk: ">=3.4.0 <4.0.0"
+  sdk: ">=3.8.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.4
+  get_it: ^7.6.0
   mvs_core:
     path: ../core
 

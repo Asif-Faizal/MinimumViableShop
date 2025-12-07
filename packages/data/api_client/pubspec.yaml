@@ -3,7 +3,7 @@ description: API client package using Dio
 version: 0.1.0
 publish_to: none
 environment:
-  sdk: ">=3.4.0 <4.0.0"
+  sdk: ">=3.8.0 <4.0.0"
 
 dependencies:
   dio: ^5.7.0
