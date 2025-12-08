@@ -11,6 +11,11 @@ dependencies:
   flutter_bloc: ^8.1.4
   go_router: ^14.2.0
   equatable: ^2.0.5
+  dartz: ^0.10.1
+  freezed_annotation: ^3.0.0
+  json_annotation: ^4.9.0
+  mvs_core:
+    path: ../../core
   mvs_shared_ui:
     path: ../../shared_ui
 
@@ -18,3 +23,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   bloc_test: ^9.1.7
+  build_runner: ^2.4.9
+  freezed: ^3.0.2
+  json_serializable: ^6.7.1

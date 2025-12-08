@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../presentation/bloc/cart_bloc.dart';
 
+import 'package:get_it/get_it.dart';
+
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CartBloc(),
+      create: (_) => GetIt.I<CartBloc>()
+        ..add(
+          ClearCart(),
+        ), // Assuming we might want to load cart? Or just fresh.
       child: Scaffold(
         appBar: AppBar(title: const Text('Cart')),
         body: BlocBuilder<CartBloc, CartState>(
@@ -24,10 +29,13 @@ class CartScreen extends StatelessWidget {
                       final item = state.items[index];
                       return ListTile(
                         title: Text(item.title),
-                        subtitle: Text('Qty: ${item.quantity} • \$${item.price}'),
+                        subtitle: Text(
+                          'Qty: ${item.quantity} • \$${item.price}',
+                        ),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
-                          onPressed: () => context.read<CartBloc>().add(RemoveItem(item.id)),
+                          onPressed: () =>
+                              context.read<CartBloc>().add(RemoveItem(item.id)),
                         ),
                       );
                     },

@@ -12,6 +12,10 @@ import 'package:features_auth/presentation/bloc/auth_bloc.dart';
 import 'package:features_auth/data/repositories/auth_repository_impl.dart';
 import 'package:features_auth/data/datasources/auth_remote_data_source.dart';
 import 'package:features_auth/domain/i_auth_repository.dart';
+import 'package:features_cart/data/datasources/cart_remote_data_source.dart';
+import 'package:features_cart/data/repositories/cart_repository_impl.dart';
+import 'package:features_cart/domain/i_cart_repository.dart';
+import 'package:features_cart/presentation/bloc/cart_bloc.dart';
 import 'router.dart';
 
 Future<void> configureDependencies(EnvManager env) async {
@@ -44,6 +48,12 @@ Future<void> configureDependencies(EnvManager env) async {
   final authBloc = AuthBloc(sl<IAuthRepository>())
     ..add(CheckSession()); // Fixed constructor
   sl.registerSingleton<AuthBloc>(authBloc);
+
+  // Cart
+  sl.registerSingleton<CartRemoteDataSource>(CartRemoteDataSourceImpl());
+  sl.registerSingleton<ICartRepository>(
+      CartRepositoryImpl(sl<CartRemoteDataSource>()));
+  sl.registerFactory<CartBloc>(() => CartBloc(sl<ICartRepository>()));
 
   final router = createRouter();
   sl.registerSingleton<GoRouter>(router);
