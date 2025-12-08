@@ -19,6 +19,7 @@ dependencies:
     path: ../../core
   mvs_shared_ui:
     path: ../../shared_ui
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:

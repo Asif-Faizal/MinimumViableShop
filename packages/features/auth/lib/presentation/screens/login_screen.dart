@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import '../../presentation/bloc/auth_bloc.dart';
@@ -32,13 +32,21 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextField(controller: _email, decoration: const InputDecoration(labelText: 'Email')),
+            TextField(
+              controller: _email,
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
             const SizedBox(height: 12),
-            TextField(controller: _password, decoration: const InputDecoration(labelText: 'Password'), obscureText: true),
+            TextField(
+              controller: _password,
+              decoration: const InputDecoration(labelText: 'Password'),
+              obscureText: true,
+            ),
             const SizedBox(height: 24),
             PrimaryButton(
               label: 'Login',
-              onPressed: () => authBloc.add(LoginRequested(_email.text, _password.text)),
+              onPressed: () =>
+                  authBloc.add(LoginRequested(_email.text, _password.text)),
             ),
             const SizedBox(height: 12),
             TextButton(

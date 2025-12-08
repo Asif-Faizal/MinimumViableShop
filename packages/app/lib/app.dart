@@ -4,7 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mvs_core/tenant/tenant_config_cubit.dart';
 import 'package:mvs_shared_ui/theme/theme_builder.dart';
-import 'router.dart';
+// import 'package:mvs_core/env/env_manager.dart';
+// import 'router.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

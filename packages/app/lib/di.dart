@@ -9,7 +9,8 @@ import 'package:mvs_core/tenant/mock_tenant_service.dart';
 import 'package:mvs_core/tenant/i_tenant_service.dart';
 import 'package:mvs_core/tenant/tenant_config_cubit.dart';
 import 'package:features_auth/presentation/bloc/auth_bloc.dart';
-import 'package:features_auth/data/auth_repository.dart';
+import 'package:features_auth/data/repositories/auth_repository_impl.dart';
+import 'package:features_auth/data/datasources/auth_remote_data_source.dart';
 import 'package:features_auth/domain/i_auth_repository.dart';
 import 'router.dart';
 
@@ -29,17 +30,19 @@ Future<void> configureDependencies(EnvManager env) async {
   final storage = const FlutterSecureStorage();
   sl.registerSingleton<SecureStorageService>(SecureStorageService(storage));
 
-  final ITenantService tenantService = env.baseUrl.isEmpty
-      ? MockTenantService()
-      : TenantService(dio);
+  final ITenantService tenantService =
+      env.baseUrl.isEmpty ? MockTenantService() : TenantService(dio);
   sl.registerSingleton<ITenantService>(tenantService);
 
   final tenantCubit = TenantConfigCubit(tenantService);
   sl.registerSingleton<TenantConfigCubit>(tenantCubit);
   await tenantCubit.load(env.clientId, env.env);
 
-  sl.registerSingleton<IAuthRepository>(AuthRepository(dio, sl<SecureStorageService>()));
-  final authBloc = AuthBloc(sl<IAuthRepository>(), sl<SecureStorageService>())..add(CheckSession());
+  sl.registerSingleton<AuthRemoteDataSource>(AuthRemoteDataSourceImpl(dio));
+  sl.registerSingleton<IAuthRepository>(AuthRepositoryImpl(
+      sl<AuthRemoteDataSource>(), sl<SecureStorageService>()));
+  final authBloc = AuthBloc(sl<IAuthRepository>())
+    ..add(CheckSession()); // Fixed constructor
   sl.registerSingleton<AuthBloc>(authBloc);
 
   final router = createRouter();
